@@ -6,7 +6,17 @@ screen = pygame.display.set_mode((900, 700))
 finished = False
 
 x = 450-35/2
-y = 645
+y = 650
+
+treasureImage = pygame.image.load("treasure.png")
+treasureImage = pygame.transform.scale(treasureImage, (35,40))
+treasureImage = treasureImage.convert_alpha()
+
+treasureX = 450 - 35/2
+treasureY = 50
+
+screen.blit(treasureImage,(treasureX,treasureY))
+
 
 playerImage = pygame.image.load("Player.png")
 playerImage = pygame.transform.scale(playerImage,(50, 60))
@@ -24,6 +34,7 @@ while finished == False:
     #black = (0, 0, 0)
     white = (255, 255, 255)
     screen.blit(backGroundImage, (0, 0))
+    screen.blit(treasureImage, (treasureX, treasureY))
     screen.blit(playerImage, (x, y))
     rectOne = pygame.Rect(x, y, 30, 30)
     frame = pygame.time.Clock()
