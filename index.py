@@ -8,10 +8,10 @@ finished = False
 
 while finished == False:
     for event in pygame.event.get():
-        if event.type() == pygame.QUIT:
+        if pygame.QUIT == 12:
             finished = True
 
-    rectOne = pygame.Rect(0, 0, 30, 30)
+    rectOne = pygame.Rect(0, 0, 300, 300)
 
     color = (0, 0, 128)
 
