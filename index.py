@@ -8,13 +8,15 @@ finished = False
 x = 0
 y = 50
 
-#print pygame.K_SPACE
+# print pygame.K_SPACE
 
 while finished == False:
     for event in pygame.event.get():
         if event.type == 12:
             finished = False
 
+    black = (0, 0, 0)
+    screen.fill(black)
     rectOne = pygame.Rect(x, y, 30, 30)
 
     pressedKeys = pygame.key.get_pressed()
@@ -33,5 +35,3 @@ while finished == False:
 
     pygame.draw.rect(screen, color, rectOne)
     pygame.display.flip()
-
-
