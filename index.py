@@ -36,6 +36,20 @@ while finished == False:
     screen.blit(backGroundImage, (0, 0))
     screen.blit(treasureImage, (treasureX, treasureY))
     screen.blit(playerImage, (x, y))
+
+    if y >= treasureY and y <= treasureY + 40:
+        if x >= treasureX and x <= treasureY + 35:
+            print "code"
+        elif x + 35 >= treasureX and x + 35 <= treasureX + 35:
+            print "code"
+    elif y >= treasureY - 40 and y + 40 <= treasureY + 40:
+        if x >= treasureX and x <= treasureX +35:
+            print "code"
+        elif x+35 > treasureX and x + 35 <= treasureX + 35:
+            print "code"
+
+
+
     rectOne = pygame.Rect(x, y, 30, 30)
     frame = pygame.time.Clock()
     pressedKeys = pygame.key.get_pressed()
