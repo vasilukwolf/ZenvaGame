@@ -5,33 +5,33 @@ screen = pygame.display.set_mode((900, 700))
 
 finished = False
 
-x = 450-35/2
+x = 450 - 35 / 2
 y = 650
 
+font = pygame.font.SysFont("comicsans", 60)
+textWin = font.render("Yep,diamond box captured", True, (0, 0, 0))
 treasureImage = pygame.image.load("treasure.png")
-treasureImage = pygame.transform.scale(treasureImage, (35,40))
+treasureImage = pygame.transform.scale(treasureImage, (35, 40))
 treasureImage = treasureImage.convert_alpha()
 
-treasureX = 450 - 35/2
+treasureX = 450 - 35 / 2
 treasureY = 50
 
-screen.blit(treasureImage,(treasureX,treasureY))
-
+screen.blit(treasureImage, (treasureX, treasureY))
 
 playerImage = pygame.image.load("Player.png")
-playerImage = pygame.transform.scale(playerImage,(50, 60))
+playerImage = pygame.transform.scale(playerImage, (50, 60))
 playerImage = playerImage.convert_alpha()
 backGroundImage = pygame.image.load("background.png")
 backGroundImage = pygame.transform.scale(backGroundImage, (900, 700))
-screen.blit(backGroundImage,(0,0))
-
+screen.blit(backGroundImage, (0, 0))
 
 while finished == False:
     for event in pygame.event.get():
         if event.type == 12:
             finished = False
 
-    #black = (0, 0, 0)
+    # black = (0, 0, 0)
     white = (255, 255, 255)
     screen.blit(backGroundImage, (0, 0))
     screen.blit(treasureImage, (treasureX, treasureY))
@@ -39,16 +39,14 @@ while finished == False:
 
     if y >= treasureY and y <= treasureY + 40:
         if x >= treasureX and x <= treasureY + 35:
-            print "code"
+            screen.blit(textWin,(300,300))
         elif x + 35 >= treasureX and x + 35 <= treasureX + 35:
-            print "code"
+            screen.blit(textWin, (300, 300))
     elif y >= treasureY - 40 and y + 40 <= treasureY + 40:
-        if x >= treasureX and x <= treasureX +35:
-            print "code"
-        elif x+35 > treasureX and x + 35 <= treasureX + 35:
-            print "code"
-
-
+        if x >= treasureX and x <= treasureX + 35:
+            screen.blit(textWin, (300, 300))
+        elif x + 35 > treasureX and x + 35 <= treasureX + 35:
+            screen.blit(textWin, (300, 300))
 
     rectOne = pygame.Rect(x, y, 30, 30)
     frame = pygame.time.Clock()
@@ -66,6 +64,6 @@ while finished == False:
 
     color = (0, 0, 128)
 
-#    pygame.draw.rect(screen, color, rectOne)
+    #    pygame.draw.rect(screen, color, rectOne)
     pygame.display.flip()
-    frame.tick(60)
+    frame.tick(360)
