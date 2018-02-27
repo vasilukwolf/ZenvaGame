@@ -33,7 +33,7 @@ y = 650
 
 
 font = pygame.font.SysFont("comicsans", 60)
-textWin = font.render("Yep,you win diamond!", True, (0, 0, 0))
+level = 1
 treasureImage = pygame.image.load("treasure.png")
 treasureImage = pygame.transform.scale(treasureImage, (35, 40))
 treasureImage = treasureImage.convert_alpha()
@@ -50,6 +50,9 @@ backGroundImage = pygame.image.load("background.png")
 backGroundImage = pygame.transform.scale(backGroundImage, (900, 700))
 screen.blit(backGroundImage, (0, 0))
 
+frame = pygame.time.Clock()
+collosionTeasure = False
+
 while finished == False:
     for event in pygame.event.get():
         if event.type == 12:
@@ -63,8 +66,13 @@ while finished == False:
     collosionTeasure,y = checkCollision(x,y,treasureX,treasureY)
 
     rectOne = pygame.Rect(x, y, 30, 30)
-    frame = pygame.time.Clock()
-    collosionTeasure = True
+    if collosionTeasure == True:
+        level += 1
+        textWin = font.render("Level up! Next level"+str(level), True, (0, 0, 0))
+        screen.blit(textWin, (450 - textWin.get_width() / 2, 300 - textWin.get_height() / 2))
+        pygame.display.flip()
+        frame.tick(1)
+
     pressedKeys = pygame.key.get_pressed()
 
     if pressedKeys[pygame.K_LEFT] == 1:
