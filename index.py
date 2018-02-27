@@ -9,7 +9,7 @@ x = 450 - 35 / 2
 y = 650
 
 font = pygame.font.SysFont("comicsans", 60)
-textWin = font.render("Yep,diamond box captured", True, (0, 0, 0))
+textWin = font.render("Yep,diamond box captured!", True, (0, 0, 0))
 treasureImage = pygame.image.load("treasure.png")
 treasureImage = pygame.transform.scale(treasureImage, (35, 40))
 treasureImage = treasureImage.convert_alpha()
@@ -39,14 +39,14 @@ while finished == False:
 
     if y >= treasureY and y <= treasureY + 40:
         if x >= treasureX and x <= treasureY + 35:
-            screen.blit(textWin,(300,300))
+            screen.blit(textWin,(450 - textWin.get_width()/2, 300 - textWin.get_height()/2))
         elif x + 35 >= treasureX and x + 35 <= treasureX + 35:
-            screen.blit(textWin, (300, 300))
+            screen.blit(textWin, (450 - textWin.get_width()/2, 300 - textWin.get_height()/2))
     elif y >= treasureY - 40 and y + 40 <= treasureY + 40:
         if x >= treasureX and x <= treasureX + 35:
-            screen.blit(textWin, (300, 300))
+            screen.blit(textWin, (450 - textWin.get_width()/2, 300 - textWin.get_height()/2))
         elif x + 35 > treasureX and x + 35 <= treasureX + 35:
-            screen.blit(textWin, (300, 300))
+            screen.blit(textWin, (450 - textWin.get_width()/2, 300 - textWin.get_height()/2))
 
     rectOne = pygame.Rect(x, y, 30, 30)
     frame = pygame.time.Clock()
