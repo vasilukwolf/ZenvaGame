@@ -38,6 +38,13 @@ treasureImage = pygame.image.load("treasure.png")
 treasureImage = pygame.transform.scale(treasureImage, (35, 40))
 treasureImage = treasureImage.convert_alpha()
 
+enemyImage = pygame.image.load("enemy.png")
+enemyImage = pygame.transform.scale(enemyImage, (35, 40))
+enemyImage = enemyImage.convert_alpha()
+
+enemyX = 50
+enemyY = 450
+
 treasureX = 450 - 35 / 2
 treasureY = 50
 
@@ -52,17 +59,18 @@ screen.blit(backGroundImage, (0, 0))
 
 frame = pygame.time.Clock()
 collosionTeasure = False
+movingRight = True
 
 while finished == False:
     for event in pygame.event.get():
         if event.type == 12:
             finished = False
-
     # black = (0, 0, 0)
     white = (255, 255, 255)
     screen.blit(backGroundImage, (0, 0))
     screen.blit(treasureImage, (treasureX, treasureY))
     screen.blit(playerImage, (x, y))
+    screen.blit(enemyImage, (enemyX, enemyY))
     collosionTeasure,y = checkCollision(x,y,treasureX,treasureY)
 
     rectOne = pygame.Rect(x, y, 30, 30)
@@ -74,6 +82,19 @@ while finished == False:
         frame.tick(1)
 
     pressedKeys = pygame.key.get_pressed()
+
+    if enemyX >= 815:
+        movingRight = False
+    elif enemyX <= 50:
+        movingRight = True
+
+    if movingRight == True:
+        enemyX += 5
+    else:
+        enemyX -= 5
+
+
+
 
     if pressedKeys[pygame.K_LEFT] == 1:
         x -= 1
@@ -89,4 +110,4 @@ while finished == False:
 
     #    pygame.draw.rect(screen, color, rectOne)
     pygame.display.flip()
-    frame.tick(360)
+    frame.tick(60)
