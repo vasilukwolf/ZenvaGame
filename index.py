@@ -62,6 +62,8 @@ collisionTeasure = False
 collisionEnemy = False
 movingRight = True
 
+enemies = [(enemyX, enemyY, movingRight)]
+
 while finished == False:
     for event in pygame.event.get():
         if event.type == 12:
@@ -71,13 +73,17 @@ while finished == False:
     screen.blit(backGroundImage, (0, 0))
     screen.blit(treasureImage, (treasureX, treasureY))
     screen.blit(playerImage, (x, y))
-    screen.blit(enemyImage, (enemyX, enemyY))
+    for enemyX, enemyY, movingRight in enemies:
+        screen.blit(enemyImage, (enemyX, enemyY))
+        collisionEnemy, y = checkCollision(x, y, enemyX, enemyY)
+
+
     collisionTeasure,y = checkCollision(x,y,treasureX,treasureY)
-    collisionEnemy, y = checkCollision(x, y, enemyX, enemyY)
 
     rectOne = pygame.Rect(x, y, 30, 30)
     if collisionTeasure == True:
         level += 1
+        enemies.append((enemyX - 50 * level, enemyY - 50 * level, False))
         textWin = font.render("Level up! Next level"+str(level), True, (0, 0, 0))
         screen.blit(textWin, (450 - textWin.get_width() / 2, 300 - textWin.get_height() / 2))
         pygame.display.flip()
@@ -88,15 +94,20 @@ while finished == False:
 
     pressedKeys = pygame.key.get_pressed()
 
-    if enemyX >= 815:
-        movingRight = False
-    elif enemyX <= 50:
-        movingRight = True
+    enemyIndex = 0
 
-    if movingRight == True:
-        enemyX += 5*level*0.2
-    else:
-        enemyX -= 5*level*0.2
+    for enemyX, enemyY, movingRight in enemies:
+        if enemyX >= 815:
+            movingRight = False
+        elif enemyX <= 50:
+            movingRight = True
+
+        if movingRight == True:
+            enemyX += 5*level*0.2
+        else:
+            enemyX -= 5*level*0.2
+        enemies[enemyIndex] = (enemyX,enemyY,movingRight)
+        enemyIndex += 1
 
 
 
