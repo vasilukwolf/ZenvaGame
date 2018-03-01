@@ -32,7 +32,11 @@ x = 450 - 35 / 2
 y = 650
 
 
+
 font = pygame.font.SysFont("comicsans", 60)
+
+enemyNames = {0: "Roll", 1: "Troll", 2: "Tinder", 3: "Sem"}
+
 level = 1
 treasureImage = pygame.image.load("treasure.png")
 treasureImage = pygame.transform.scale(treasureImage, (35, 40))
@@ -73,9 +77,21 @@ while finished == False:
     screen.blit(backGroundImage, (0, 0))
     screen.blit(treasureImage, (treasureX, treasureY))
     screen.blit(playerImage, (x, y))
+
+    enemyIndex = 0
+
     for enemyX, enemyY, movingRight in enemies:
         screen.blit(enemyImage, (enemyX, enemyY))
         collisionEnemy, y = checkCollision(x, y, enemyX, enemyY)
+        if collisionEnemy == True:
+            name = enemyNames[enemyIndex]
+            textLose = font.render("You will kill by " + name, True, (255, 0, 0))
+            screen.blit(textLose, (450 - textLose.get_width() / 2, 300 - textLose.get_height() / 2))
+            pygame.display.flip()
+            frame.tick(1)
+        frame.tick(30)
+        enemyIndex += 1
+
 
 
     collisionTeasure,y = checkCollision(x,y,treasureX,treasureY)
@@ -84,7 +100,7 @@ while finished == False:
     if collisionTeasure == True:
         level += 1
         enemies.append((enemyX - 50 * level, enemyY - 50 * level, False))
-        textWin = font.render("Level up! Next level"+str(level), True, (0, 0, 0))
+        textWin = font.render("Level up! Next level "+str(level), True, (0, 0, 0))
         screen.blit(textWin, (450 - textWin.get_width() / 2, 300 - textWin.get_height() / 2))
         pygame.display.flip()
         frame.tick(1)
@@ -95,7 +111,6 @@ while finished == False:
     pressedKeys = pygame.key.get_pressed()
 
     enemyIndex = 0
-
     for enemyX, enemyY, movingRight in enemies:
         if enemyX >= 815:
             movingRight = False
@@ -103,27 +118,27 @@ while finished == False:
             movingRight = True
 
         if movingRight == True:
-            enemyX += 5*level*0.2
+            enemyX += 5*level
         else:
-            enemyX -= 5*level*0.2
-        enemies[enemyIndex] = (enemyX,enemyY,movingRight)
+            enemyX -= 5*level
+        enemies[enemyIndex] = (enemyX, enemyY, movingRight)
         enemyIndex += 1
 
 
 
 
     if pressedKeys[pygame.K_LEFT] == 1:
-        x -= 1
+        x -= 5
     if pressedKeys[pygame.K_RIGHT] == 1:
-        x += 1
+        x += 5
 
     if pressedKeys[pygame.K_UP] == 1:
-        y -= 1
+        y -= 5
     if pressedKeys[pygame.K_DOWN] == 1:
-        y += 1
+        y += 5
 
     color = (0, 0, 128)
 
     #    pygame.draw.rect(screen, color, rectOne)
     pygame.display.flip()
-    frame.tick(60)
+    frame.tick(30)
