@@ -54,7 +54,7 @@ treasureY = 50
 
 screen.blit(treasureImage, (treasureX, treasureY))
 
-playerImage = pygame.image.load("Player.png")
+playerImage = pygame.image.load("player.png")
 playerImage = pygame.transform.scale(playerImage, (50, 60))
 playerImage = playerImage.convert_alpha()
 backGroundImage = pygame.image.load("background.png")
